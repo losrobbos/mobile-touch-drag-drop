@@ -6,8 +6,7 @@
 Demo: https://mobile-touch-dragdrop-demo.vercel.app
 
 Important: To test it either open the page on your smartphone.
-Or open the page in your desktop browser dev tools switching to MOBILE view and refresh the page.
-Otherwise the touch events won't work (they are mobile only).
+Or open the page in your desktop browser dev tools, switch to MOBILE / device view and refresh the page. Otherwise the touch events won't work (they are mobile only).
 
 ## What to do
 
