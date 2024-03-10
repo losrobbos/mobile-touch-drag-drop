@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Touch DragNDrop</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .starter-container {
+      margin: 10px;
+    }
+
+    .starter-container, .draggie {
+      height: 100px;
+      width: 100px;
+      border: 1px solid #ccc;
+    }
+
+    .draggie {
+      cursor: move;
+      touch-action: none;
+      user-select: none;
+      background-image: url("//unsplash.it/100/100/?banana");
+    }
+
+    .dropzones {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      width: 500px;
+    }
+
+    .dropzone {
+      height: 120px;
+      width: 120px;
+      padding: 8px;
+      border: 2px solid purple;
+    }
+
+    .dropzone.active {
+      background-color: purple;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="starter-container">
+    <div class="draggie" id="draggie" draggable="true"></div>
+  </div>
+
+  <div class="dropzones">
+    <div class="dropzone"></div>
+    <div class="dropzone"></div>
+    <div class="dropzone"></div>
+    <div class="dropzone"></div>
+    <div class="dropzone"></div>
+    <div class="dropzone"></div>
+    <div class="dropzone"></div>
+    <div class="dropzone"></div>
+  </div>
+
+  <script>
+    const draggie = document.querySelector(".draggie")
+    const dropzones = document.querySelectorAll(".dropzone")
+
+    const getDropTarget = (event) => {
+      const touchobj = event.changedTouches[0];
+      const dropTarget = document.elementFromPoint(touchobj.clientX, touchobj.clientY)
+      if(!dropTarget) return null
+
+      return dropTarget.classList.contains("dropzone") ? dropTarget : null;
+    }
+
+    const clearHoverStyles = () => {
+      dropzones.forEach(dropzone => {
+        dropzone.classList.remove("active")
+        // dropzone.style.backgroundColor = 'initial';
+      })
+    }
+
+    // initiate the drag
+    draggie.ontouchstart = (event) => {
+      event.preventDefault()
+      // console.log("Start dragging")
+    }
+
+    draggie.ontouchmove = (event) => {
+      const dropTarget = getDropTarget(event)
+
+      if (dropTarget) {
+        // clear all other cells
+        clearHoverStyles()
+        // move draggie as child into dropzone!
+        dropTarget.classList.add("active")
+        // dropTarget.style.backgroundColor = 'purple';
+      }
+    }
+
+    draggie.ontouchend = (event) => {
+      event.preventDefault()
+      // console.log("Droppin!")
+      const dropTarget = getDropTarget(event)
+
+      clearHoverStyles()
+      if (dropTarget) {
+        // move draggie as child into dropzone!
+        dropTarget.appendChild(draggie);
+      }
+      else {
+        console.log("No valid drop targeto!")
+      }      
+    }
+
+  </script>
+</body>
+
+</html>
