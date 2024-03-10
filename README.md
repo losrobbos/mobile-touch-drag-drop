@@ -1,6 +1,15 @@
 # Mobile touch drag n drop
 
+
+## Demo 
+
 Demo: https://mobile-touch-dragdrop-demo.vercel.app
+
+Important: To test it either open the page on your smartphone.
+Or open the page in your desktop browser dev tools switching to MOBILE view and refresh the page.
+Otherwise the touch events won't work (they are mobile only).
+
+## What to do
 
 Find here a minimal sample to realize a dragNdrop of an item in mobile browsers using touch events.
 
